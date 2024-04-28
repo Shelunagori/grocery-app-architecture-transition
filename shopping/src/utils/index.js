@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const axios = require("axios");
+const dotEnv = require("dotenv");
 const { APP_SECRET } = require("../config");
 
 //Utility functions
@@ -48,4 +49,16 @@ module.exports.FormateData = (data) => {
   } else {
     throw new Error("Data Not found!");
   }
+};
+
+module.exports.PublishCustomerEvents = (payload) => {
+  axios.post(`${dotEnv.process.apiGetwayPath}/customer/app-events`, {
+    payload,
+  });
+};
+
+module.exports.PublishShoppingEvents = (payload) => {
+  axios.post(`${dotEnv.process.apiGetwayPath}/shopping/app-events`, {
+    payload,
+  });
 };
