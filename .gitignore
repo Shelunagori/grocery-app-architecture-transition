@@ -1,2 +1,11 @@
-node_modules
-package-lock.json
+api-getway\node_modules
+api-getway\package-lock.json
+
+customers\node_modules
+customers\package-lock.json
+
+products\node_modules
+products\package-lock.json
+
+shopping\node_modules
+shopping\package-lock.json
