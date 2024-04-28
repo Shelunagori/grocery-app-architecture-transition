@@ -18,10 +18,10 @@ You can explore the merged code in the `main` branch. For specific architectural
 ## Architecture Overview
 
 ### Monolithic Architecture
-![Monolithic Architecture](https://raw.githubusercontent.com/Shelunagori/grocery-app-architecture-transition/main/assets/monolithic-architecture.png?token=GHSAT0AAAAAACRRRCQXAHS6POVCXC3ZE7OQZROKYVA)
+![Monolithic Architecture](https://github.com/Shelunagori/grocery-app-architecture-transition/blob/main/assets/monolithic-architecture.png?raw=true)
 
 ### Microservices Architecture
-![Microservices Architecture](https://raw.githubusercontent.com/Shelunagori/grocery-app-architecture-transition/main/assets/microservices%20architecture.png?token=GHSAT0AAAAAACRRRCQWHLYBFGUKMMXPYYIGZROKYSA)
+![Microservices Architecture](https://github.com/Shelunagori/grocery-app-architecture-transition/blob/main/assets/microservices%20architecture.png?raw=true)
 
 ## Functional Requirements
 
