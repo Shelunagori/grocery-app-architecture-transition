@@ -52,13 +52,13 @@ module.exports.FormateData = (data) => {
 };
 
 module.exports.PublishCustomerEvents = (payload) => {
-  axios.post(`${dotEnv.process.apiGetwayPath}/customer/app-events`, {
+  axios.post(`${process.env.apiGetwayPath}/customer/app-events`, {
     payload,
   });
 };
 
 module.exports.PublishShoppingEvents = (payload) => {
-  axios.post(`${dotEnv.process.apiGetwayPath}/shopping/app-events`, {
+  axios.post(`${process.env.apiGetwayPath}/shopping/app-events`, {
     payload,
   });
 };

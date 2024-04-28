@@ -14,10 +14,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/customer', proxy(process.env.customers_services_base));
-app.use('/', proxy(process.env.products_services_base));
-app.use('/shopping', proxy(process.env.shopping_services_base));
-
+app.use("/customer", proxy(process.env.customers_services_base));
+app.use("/shopping", proxy(process.env.shopping_services_base));
+app.use("/", proxy(process.env.products_services_base));
 
 app.listen(process.env.PORT, () => {
         console.log(`api-getway listening to port ${process.env.PORT}`);

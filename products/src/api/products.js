@@ -72,7 +72,6 @@ module.exports = (app) => {
       );
 
       PublishCustomerEvents(data);
-
       return res.status(200).json(data.data.product);
     } catch (err) {}
   });
@@ -96,7 +95,7 @@ module.exports = (app) => {
   });
 
   app.put("/cart", UserAuth, async (req, res, next) => {
-    const { _id } = req.body;
+    const { _id } = req.user;
 
     try {
       const { data } = await service.GetProductPayload(

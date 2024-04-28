@@ -4,7 +4,7 @@ module.exports = (app) => {
     app.use('/app-events', async(req, res) => {
         const {payload} = req.body;
         service.SubscribeEvents(payload);
-        console.log("======= Shopping Service Receoved events =====");
+        console.log("======= Customer Service Receoved events =====");
         res.status(200).json(payload);
     });
 }

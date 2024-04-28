@@ -24,7 +24,7 @@ class ShoppingRepository {
     }
   }
 
-  async Cart() {
+  async Cart(customerId) {
     try {
       const cartItem = await CartModel.find({
         customerId: customerId,
@@ -35,7 +35,9 @@ class ShoppingRepository {
       }
 
       throw new Error("Cart data not found");
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async AddCartItem(customerId, item, qty, isRemove) {
