@@ -87,7 +87,7 @@ module.exports = (app, channel) => {
       const { data } = await service.GetProductPayload(
         _id,
         { productId },
-        "REMOVE_TO_WISHLIST"
+        "REMOVE_FROM_WISHLIST"
       );
       //PublishCustomerEvents(data);
       PublishMessage(channel, CUSTOMER_BINDING_KEY, JSON.stringify(data));
