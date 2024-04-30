@@ -14,6 +14,7 @@ You can explore the merged code in the `main` branch. For specific architectural
 
 - For **Monolithic architecture**, visit the `monolithic` branch.
 - For **Microservices architecture**, check out the `microservices` branch.
+- For **Microservices with message and ngnix**, check out `microservices_message_broker` branch.
 
 ## Architecture Overview
 
@@ -22,6 +23,9 @@ You can explore the merged code in the `main` branch. For specific architectural
 
 ### Microservices Architecture
 ![Microservices Architecture](https://github.com/Shelunagori/grocery-app-architecture-transition/blob/main/assets/microservices%20architecture.png?raw=true)
+
+### Microservices with message broker and nginx
+![Message Broker](https://github.com/Shelunagori/grocery-app-architecture-transition/blob/main/assets/message-broker.png?raw=true)
 
 ## Functional Requirements
 
