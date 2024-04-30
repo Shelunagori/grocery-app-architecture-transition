@@ -1,9 +1,9 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const axios = require("axios");
-const dotEnv = require("dotenv").config();
+//const axios = require("axios");
+const amqplib = require("amqplib");
 
-const { APP_SECRET } = require("../config");
+const { APP_SECRET, MESSAGE_BROKER_URL, EXCHNAGE_NAME } = require("../config");
 
 //Utility functions
 module.exports.GenerateSalt = async () => {
@@ -52,23 +52,58 @@ module.exports.FormateData = (data) => {
   }
 };
 
-module.exports.PublishCustomerEvents = (payload) => {
+// module.exports.PublishCustomerEvents = (payload) => {
+//   try {
+//     axios.post(`${process.env.apiGetwayPath}/customer/app-events`, {
+//       payload,
+//     });
+//   } catch (error) {
+//     console.log("error >>>>>", error.message);
+//   }
+// };
+
+// module.exports.PublishShoppingEvents = (payload) => {
+//   console.log("path", `${process.env.apiGetwayPath}/shopping/app-events`);
+//   try {
+//     axios.post(`${process.env.apiGetwayPath}/shopping/app-events`, {
+//       payload,
+//     });
+//   } catch (error) {
+//     console.log("error >>>>>", error.message);
+//   }
+// };
+
+/******** MESSAGE BROKER **********/
+
+//create channel
+module.exports.CreateChannel = async () => {
   try {
-    axios.post(`${process.env.apiGetwayPath}/customer/app-events`, {
-      payload,
-    });
+    const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+    const channel = await connection.createChannel();
+    await channel.assertExchange(EXCHNAGE_NAME, "direct", false);
+    console.log("RabbitMQ connected");
+    return channel;
   } catch (error) {
-    console.log("error >>>>>", error.message);
+    throw error;
   }
 };
 
-module.exports.PublishShoppingEvents = (payload) => {
-  console.log("path", `${process.env.apiGetwayPath}/shopping/app-events`);
+//publish message
+module.exports.PublishMessage = async (channel, binding_key, message) => {
   try {
-    axios.post(`${process.env.apiGetwayPath}/shopping/app-events`, {
-      payload,
-    });
+    await channel.publish(EXCHNAGE_NAME, binding_key, Buffer.from(message));
+    console.log("Message Published");
   } catch (error) {
-    console.log("error >>>>>", error.message);
+    throw error;
   }
+};
+//subscribe message
+module.exports.SubscribeMessage = async (channel, service, binding_key) => {
+  const appQueue = await channel.assertQueue(QUEUE_NAME);
+  channel.bindQueue(appQueue.queue, EXCHNAGE_NAME, binding_key);
+  channel.consume(appQueue.queue, (data) => {
+    console.log("Data Received");
+    console.log(data.content.toString());
+    channel.ack(data);
+  });
 };

@@ -1,7 +1,13 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const { APP_SECRET } = require("../config");
+const amqplib = require("amqplib");
+const {
+  APP_SECRET,
+  MESSAGE_BROKER_URL,
+  EXCHNAGE_NAME,
+  QUEUE_NAME,
+  CUSTOMER_BINDING_KEY,
+} = require("../config");
 
 //Utility functions
 module.exports.GenerateSalt = async () => {
@@ -48,4 +54,30 @@ module.exports.FormateData = (data) => {
   } else {
     throw new Error("Data Not found!");
   }
+};
+
+/******** MESSAGE BROKER **********/
+//create channel
+module.exports.CreateChannel = async () => {
+  try {
+    const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+    const channel = await connection.createChannel();
+    await channel.assertExchange(EXCHNAGE_NAME, "direct", false);
+    console.log("RabbitMQ connected");
+    return channel;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//subscribe message
+module.exports.SubscribeMessage = async (channel, service) => {
+  const appQueue = await channel.assertQueue(QUEUE_NAME);
+  channel.bindQueue(appQueue.queue, EXCHNAGE_NAME, CUSTOMER_BINDING_KEY);
+  channel.consume(appQueue.queue, (data) => {
+    console.log("Data Received");
+    console.log(data.content.toString());
+    service.SubscribeEvents(data.content.toString());
+    channel.ack(data);
+  });
 };
