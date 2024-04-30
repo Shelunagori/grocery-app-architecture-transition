@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //const axios = require("axios");
 const amqplib = require("amqplib");
@@ -92,13 +92,13 @@ module.exports.CreateChannel = async () => {
 module.exports.PublishMessage = async (channel, binding_key, message) => {
   try {
     await channel.publish(EXCHNAGE_NAME, binding_key, Buffer.from(message));
-    console.log("Message Published")
+    console.log("Message Published");
   } catch (error) {
     throw error;
   }
 };
 //subscribe message
-module.exports.SubscribeMessage = async(channel, service, binding_key) => {
+module.exports.SubscribeMessage = async (channel, service, binding_key) => {
   const appQueue = await channel.assertQueue(QUEUE_NAME);
   channel.bindQueue(appQueue.queue, EXCHNAGE_NAME, binding_key);
   channel.consume(appQueue.queue, (data) => {
@@ -106,4 +106,4 @@ module.exports.SubscribeMessage = async(channel, service, binding_key) => {
     console.log(data.content.toString());
     channel.ack(data);
   });
-}
+};

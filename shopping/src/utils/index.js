@@ -1,8 +1,14 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //const axios = require("axios");
 const amqplib = require("amqplib");
-const { APP_SECRET, MESSAGE_BROKER_URL, EXCHNAGE_NAME, QUEUE_NAME, SHOPPING_BINDING_KEY } = require("../config");
+const {
+  APP_SECRET,
+  MESSAGE_BROKER_URL,
+  EXCHNAGE_NAME,
+  QUEUE_NAME,
+  SHOPPING_BINDING_KEY,
+} = require("../config");
 
 //Utility functions
 module.exports.GenerateSalt = async () => {
@@ -63,7 +69,6 @@ module.exports.FormateData = (data) => {
 //   });
 // };
 
-
 /******** MESSAGE BROKER **********/
 
 //create channel
@@ -83,13 +88,13 @@ module.exports.CreateChannel = async () => {
 module.exports.PublishMessage = async (channel, binding_key, message) => {
   try {
     await channel.publish(EXCHNAGE_NAME, binding_key, Buffer.from(message));
-    console.log("Message Published from shopping service")
+    console.log("Message Published from shopping service");
   } catch (error) {
     throw error;
   }
 };
 //subscribe message
-module.exports.SubscribeMessage = async(channel, service) => {
+module.exports.SubscribeMessage = async (channel, service) => {
   const appQueue = await channel.assertQueue(QUEUE_NAME);
   channel.bindQueue(appQueue.queue, EXCHNAGE_NAME, SHOPPING_BINDING_KEY);
   channel.consume(appQueue.queue, (data) => {
@@ -98,4 +103,4 @@ module.exports.SubscribeMessage = async(channel, service) => {
     service.SubscribeEvents(data.content.toString());
     channel.ack(data);
   });
-}
+};

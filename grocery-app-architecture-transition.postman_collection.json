@@ -104,7 +104,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/signup",
+							"raw": "{{CUSTOMER_BASE}}/customers/signup",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -131,7 +131,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/login",
+							"raw": "{{CUSTOMER_BASE}}/customers/login",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -161,7 +161,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/profile",
+							"raw": "{{CUSTOMER_BASE}}/customers/profile",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/shoping-details",
+							"raw": "{{CUSTOMER_BASE}}/customers/shoping-details",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -218,7 +218,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/address",
+							"raw": "{{CUSTOMER_BASE}}/customers/address",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -236,7 +236,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/wishlist",
+							"raw": "{{CUSTOMER_BASE}}/customers/wishlist",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
@@ -263,7 +263,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/customer/app-events",
+							"raw": "http://localhost:80/customers/app-events",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -549,17 +549,17 @@
 	"variable": [
 		{
 			"key": "SHOPPING_BASE",
-			"value": "http://localhost:8000",
+			"value": "http://localhost:80",
 			"type": "string"
 		},
 		{
 			"key": "CUSTOMER_BASE",
-			"value": "http://localhost:8000",
+			"value": "http://localhost:80",
 			"type": "string"
 		},
 		{
 			"key": "PRODUCTS_BASE",
-			"value": "http://localhost:8000",
+			"value": "http://localhost:80",
 			"type": "string"
 		}
 	]
