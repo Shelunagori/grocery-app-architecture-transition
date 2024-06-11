@@ -8,14 +8,6 @@ This repository presents a practical demonstration of transitioning from a Monol
 
 The shift from a monolithic architecture to a microservices-based one is paramount for enhancing the scalability, flexibility, and maintainability of modern applications. By decomposing the application into smaller, loosely-coupled services, we aim to enhance agility, facilitate independent deployment and scaling of components, and strengthen fault isolation.
 
-## Branches
-
-You can explore the merged code in the `main` branch. For specific architectural views, you can navigate to the following branches:
-
-- For **Monolithic architecture**, visit the `monolithic` branch.
-- For **Microservices architecture**, check out the `microservices` branch.
-- For **Microservices with message and ngnix**, check out `microservices_message_broker` branch.
-
 ## Architecture Overview
 
 ### Monolithic Architecture
@@ -35,5 +27,13 @@ You can explore the merged code in the `main` branch. For specific architectural
 4. **Add Product to Wishlist**: Provide functionality for users to add products to their wishlist for future reference.
 5. **Place an Order**: Allow users to place orders for the selected products.
 6. **View Orders**: Enable users to view their order history and current order status.
+
+## Branches
+
+You can explore the merged code in the `main` branch. For specific architectural views, you can navigate to the following branches:
+
+- For **Monolithic architecture**, visit the `monolithic` branch.
+- For **Microservices architecture**, check out the `microservices` branch.
+- For **Microservices with message and ngnix**, check out `microservices_message_broker` branch.
 
 Feel free to explore the code and branches to gain insights into our architecture transition journey!
